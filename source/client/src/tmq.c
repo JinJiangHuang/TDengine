@@ -1747,6 +1747,16 @@ const char* tmq_err2str(int32_t err) {
   }
 }
 
+tmq_res_t tmq_get_res_type(TAOS_RES* res) {
+  if (TD_RES_TMQ(res)) {
+    return TMQ_RES_DATA;
+  } else if (TD_RES_TMQ_META(res)) {
+    return TMQ_RES_TABLE_META;
+  } else {
+    return TMQ_RES_INVALID;
+  }
+}
+
 const char* tmq_get_topic_name(TAOS_RES* res) {
   if (TD_RES_TMQ(res)) {
     SMqRspObj* pRspObj = (SMqRspObj*)res;
